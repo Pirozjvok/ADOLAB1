@@ -10,7 +10,7 @@ namespace ADOLAB1
         public Form1()
         {
             InitializeComponent();
-            _connectionString = "Server=localhost;Database=ADOLAB;Trusted_Connection=True;";
+            _connectionString = "Server=(localdb)\\mssqllocaldb;Database=master;Trusted_Connection=True;";
         }
 
         private SqlConnection CreateConnection() => new SqlConnection(_connectionString);
@@ -85,7 +85,7 @@ namespace ADOLAB1
             using SqlConnection connection = CreateConnection();
             connection.Open(); // синхронное подключение, требуется закрытие в конце блока
             SqlCommand command = new() { Connection = connection };
-            string employeeReadPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\employees.txt";
+            string employeeReadPath = "employees.txt";
             List<string> txt = File.ReadLines(@employeeReadPath).ToList();
             txt.ForEach(t =>
             {
@@ -101,7 +101,7 @@ namespace ADOLAB1
                 }
             });
             command.CommandText = null; // Прочтите информацию о заработной плате в файле
-            string wagesReadPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\wages.txt";
+            string wagesReadPath = "wages.txt";
             List<string> txt1 = File.ReadLines(@wagesReadPath).ToList();
             txt1.ForEach(t =>
             {
@@ -116,7 +116,7 @@ namespace ADOLAB1
                 }
             });
             command.CommandText = null;
-            string attendReadPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + "\\attendances.txt";
+            string attendReadPath = "attendances.txt";
             List<string> txt2 = File.ReadLines(@attendReadPath).ToList();
             txt2.ForEach(t =>
             {
